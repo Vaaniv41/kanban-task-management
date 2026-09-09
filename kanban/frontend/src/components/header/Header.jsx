@@ -16,7 +16,7 @@ const Header = () => {
     
     const Navigate = useNavigate();
     const context = useContext(AppContext);
-    const { sidebarHidden, darkTheme, boardsOverview, setBoardsOverview, selectedBoard, setSelectedBoard, columnsName, columns, setColumns, columnOrder, setColumnOrder } = context;
+    const { sidebarHidden, darkTheme, boardsOverview, setBoardsOverview, selectedBoard, setSelectedBoard, columnsName, setColumns, setColumnOrder } = context;
 
     const [showModal, setShowModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
