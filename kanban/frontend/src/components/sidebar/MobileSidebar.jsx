@@ -44,9 +44,11 @@ const MobileSidebar = () => {
   }, [boardIsSuccess, newBoard]);
 
 
-  if(!isBoardLoading && boardsData){
-    setBoardsOverview(boardsData?.data)
-  }
+  useEffect(() => {
+    if (!isBoardLoading && boardsData?.data) {
+      setBoardsOverview(boardsData.data);
+    }
+  }, [isBoardLoading, boardsData, setBoardsOverview]);
 
   if (isBoardLoading) return 'Loading...';
 

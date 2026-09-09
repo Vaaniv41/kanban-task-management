@@ -110,9 +110,11 @@ function Area() {
   const { updateColumn } = useUpdateColumn();
   const { createColumn, columnIsSuccess, newColumn } = useCreateColumn();
 
-  if(!isLoading && !error && data.data){
-    setSelectedBoard(data.data)
-  }
+  useEffect(() => {
+    if (!isLoading && !error && data?.data) {
+      setSelectedBoard(data.data);
+    }
+  }, [isLoading, error, data, setSelectedBoard]);
 
   useEffect(()=>{
       

@@ -104,9 +104,11 @@ function ColumnBody({ droppableId, column, columns, setColumns }) {
     }  
 
 
-    if(!isLoading && !error && data.data){
-        setSelectedBoard(data.data)
-    }
+    useEffect(() => {
+        if (!isLoading && !error && data?.data) {
+            setSelectedBoard(data.data);
+        }
+    }, [isLoading, error, data, setSelectedBoard]);
 
     function openModal() {
         setShowModal(true);

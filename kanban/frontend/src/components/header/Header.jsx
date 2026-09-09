@@ -139,9 +139,11 @@ const Header = () => {
     };
     
 
-    if(!isBoardLoading && boardsData){
-        setBoardsOverview(boardsData.data)
-    }
+    useEffect(() => {
+        if (!isBoardLoading && boardsData?.data) {
+            setBoardsOverview(boardsData.data);
+        }
+    }, [isBoardLoading, boardsData, setBoardsOverview]);
     
 
     const handleDeleteBoard = () =>{

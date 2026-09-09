@@ -25,9 +25,11 @@ export default function Main() {
 
   const { isLoading, error, data } = useBoardData(boardId)
 
-  if(!isLoading && !error){
-    setSelectedBoard(data.data)
-  }
+  useEffect(() => {
+    if (!isLoading && !error && data?.data) {
+      setSelectedBoard(data.data);
+    }
+  }, [isLoading, error, data, setSelectedBoard]);
 
   if (isLoading) return 'Loading...';
   if (error) return `Error: ${error.message}`;
