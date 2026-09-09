@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Main from "./components/Main";
 import Dashboard from "./components/Dashboard";
 import NotFound from './components/NotFound';
-
 
 export default function App() {
   return (
@@ -18,5 +17,5 @@ export default function App() {
         <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
     </>
-  )
+  );
 }

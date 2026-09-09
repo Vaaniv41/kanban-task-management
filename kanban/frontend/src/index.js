@@ -7,7 +7,8 @@ import { AppProvider } from './context/AppContext';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Modal from 'react-modal';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const queryClient = new QueryClient();
 
