@@ -103,7 +103,7 @@ function Dashboard() {
 
   return (
     <div>
-      {charts}
+      {charts?.length ? charts : <p>No boards available</p>}
     </div>
   );
 }
