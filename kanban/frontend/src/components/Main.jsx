@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Header from './header/Header';
 import SidebarContent from "./sidebar/SidebarContent";
 import "../App.css"
-import "../assets/css/bootstrap.css"
 import AppContext from '../context/AppContext';
 import Area from './dragNdrop/Area';
 import { useBoardData } from './features/customHooks';

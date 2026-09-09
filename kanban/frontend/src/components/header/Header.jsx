@@ -38,30 +38,30 @@ const Header = () => {
     const [status, setStatus] = useState('');
 
     useEffect(() => {
-        if (taskIsSuccess) {
-
-            const Column = columns[newTask.data.columnId];
-            const newTasks = [...Column.tasks, newTask.data];
-        
-            setColumns({
-              ...columns,
-              [newTask.data.columnId]: {
-                ...Column,
-                tasks: newTasks
-              }
+        if (taskIsSuccess && newTask?.data) {
+            setColumns(prevColumns => {
+                const Column = prevColumns[newTask.data.columnId];
+                if (!Column) return prevColumns;
+                return {
+                    ...prevColumns,
+                    [newTask.data.columnId]: {
+                        ...Column,
+                        tasks: [...Column.tasks, newTask.data]
+                    }
+                };
             });
         }
-    }, [taskIsSuccess, newTask]);
+    }, [taskIsSuccess, newTask, setColumns]);
 
     useEffect(() => {
-        if (updateBoardSuccess) {
+        if (updateBoardSuccess && updatedBoard?.data) {
 
             const updatedColumns = updatedBoard.data.columns.map((column) => {
-                const selectedColumn = selectedBoard.columns.find((c) => c.id === column.id);
+                const selectedColumn = selectedBoard?.columns?.find((c) => c.id === column.id);
                 if (selectedColumn) {
                   return {
                     ...column,
-                    tasks: [...selectedColumn?.tasks],
+                    tasks: [...(selectedColumn?.tasks || [])],
                   };
                 }
                 return column;
@@ -75,20 +75,19 @@ const Header = () => {
             setSelectedBoard(updatedBoardWithTasks)
             successToast("Board updated successfully!");
         }
-    }, [updateBoardSuccess, updatedBoard]);
+    }, [updateBoardSuccess, updatedBoard, selectedBoard, setSelectedBoard]);
     
     useEffect(() => {
         if (deleteColumnSuccess) {
-            const newColums = [...columnOrder]
-            const colIndex = columnOrder.findIndex(item => item === deletedColumnInd.id)
-            newColums.splice(colIndex, 1)
-            setColumnOrder(newColums)
-            const updatedCols = {...columns}
-            delete updatedCols[deletedColumnInd.id]
-            setColumns(updatedCols)
-            setEditColumns(editColumns.filter((_, i) => i !== deletedColumnInd.ind));
+            setColumnOrder(prev => prev.filter(item => item !== deletedColumnInd.id));
+            setColumns(prev => {
+                const updatedCols = { ...prev };
+                delete updatedCols[deletedColumnInd.id];
+                return updatedCols;
+            });
+            setEditColumns(prev => prev.filter((_, i) => i !== deletedColumnInd.ind));
         }
-    }, [deleteColumnSuccess]);
+    }, [deleteColumnSuccess, deletedColumnInd.id, deletedColumnInd.ind, setColumnOrder, setColumns]);
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
@@ -258,11 +257,13 @@ const Header = () => {
                             <span className='elipses dropdown' >
                                 <FontAwesomeIcon className="dropbtn" style={{color:"#828FA3"}} icon={faEllipsisVertical} />
                                 <div className="dropdown-content all-menu">
+                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                     <a onClick={onOpenEditBoard} className='editbtn' >   
                                         <span>
                                             Edit Board
                                         </span>
                                     </a>
+                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                     <a onClick={()=>{setDeleteModal(true)}} className='deletebtn' >
                                         <span>
                                             Delete Board

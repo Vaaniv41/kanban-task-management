@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "../../assets/css/dragndrop.css";
 import { Draggable } from 'react-beautiful-dnd';
 
 
 function Task({ task, index, setTask, setSubtasks, viewTask }) {
 
-  const completed = task?.subtasks.filter(item => item.completed == true);
+  const completed = task?.subtasks?.filter(item => item.completed === true) || [];
 
   const doubleClicked = () => {
     setTask(task);

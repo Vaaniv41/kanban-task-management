@@ -34,26 +34,33 @@ function ColumnBody({ droppableId, column, columns, setColumns }) {
 
     useEffect(() => {
         if (deleteSubtaskSuccess) {
-            setSubtasks(subtasks.filter((_, i) => i !== deletedSubtaskInd));
+            setSubtasks(prev => prev.filter((_, i) => i !== deletedSubtaskInd));
         }
-    }, [deleteSubtaskSuccess]);
+    }, [deleteSubtaskSuccess, deletedSubtaskInd]);
     
     useEffect(() => {
-        if (updateTaskSuccess) {
-            const Column = columns[updatedTask.data.columnId]
-            const beforeTasks = [...Column.tasks]
-            const taskIndex = beforeTasks?.findIndex(item => item.id === updatedTask.data.id);
-            beforeTasks.splice(taskIndex, 1, updatedTask.data);
-            setColumns({
-                ...columns,
-                [updatedTask.data.columnId]: {
-                    ...Column,
-                    tasks: beforeTasks
+        if (updateTaskSuccess && updatedTask?.data) {
+            setColumns(prevColumns => {
+                const Column = prevColumns[updatedTask.data.columnId];
+                if (!Column) return prevColumns;
+                const beforeTasks = [...Column.tasks];
+                const taskIndex = beforeTasks.findIndex(item => item.id === updatedTask.data.id);
+                if (taskIndex !== -1) {
+                    beforeTasks.splice(taskIndex, 1, updatedTask.data);
+                } else {
+                    beforeTasks.push(updatedTask.data);
                 }
-            })
+                return {
+                    ...prevColumns,
+                    [updatedTask.data.columnId]: {
+                        ...Column,
+                        tasks: beforeTasks
+                    }
+                };
+            });
             successToast("Task updated successfully!");
         }
-    }, [updateTaskSuccess, updatedTask]);
+    }, [updateTaskSuccess, updatedTask, setColumns]);
 
     const handleAddSubtask = () => {
         setSubtasks([...subtasks, { title: '', completed: false }]);
@@ -242,11 +249,13 @@ function ColumnBody({ droppableId, column, columns, setColumns }) {
             <span className='elipses dropdown' >
                 <FontAwesomeIcon className="dropbtn" style={{color:"#828FA3"}} icon={faEllipsisVertical} />
                 <div className="dropdown-content all-menu">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a onClick={openEditModal} className='editbtn' >   
                         <span>
                             Edit Task
                         </span>
                     </a>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a onClick={openDeleteModal} className='deletebtn' >
                         <span>
                             Delete Task

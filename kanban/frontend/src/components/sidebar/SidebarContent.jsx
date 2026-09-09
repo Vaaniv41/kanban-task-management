@@ -33,7 +33,7 @@ const SidebarContent = () => {
     
     localStorage.setItem("dark-theme", darkTheme)
     
-    if(darkTheme == true){
+    if(darkTheme === true){
       document.body.className = "dark-theme"
     }else{
       document.body.className = "light-theme"
@@ -45,7 +45,7 @@ const SidebarContent = () => {
       setBoardsOverview(prev => [...prev, newBoard.data])
       Navigate(`/board/${newBoard.data.id}`)
     }
-  }, [boardIsSuccess, newBoard]);
+  }, [boardIsSuccess, newBoard, Navigate, setBoardsOverview]);
 
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const SidebarContent = () => {
           <h2 className='me-3 ms-3 mb-3'>ALL BOARDS ({boardsOverview?.length})</h2>
           <ul>
             {boardsOverview?.map((link, ind) => (
-              <span key={ind} onClick={()=>{Navigate(`/board/${link.id}`)}} className={link.id == selectedBoard.id?"Platform-Launch":"Marketing"}>
+              <span key={ind} onClick={()=>{Navigate(`/board/${link.id}`)}} className={link.id === selectedBoard?.id?"Platform-Launch":"Marketing"}>
                 <FontAwesomeIcon className="me-3 ms-3" icon={faTableList} rotation={180} />
                 <li>{link.name}</li>
               </span>

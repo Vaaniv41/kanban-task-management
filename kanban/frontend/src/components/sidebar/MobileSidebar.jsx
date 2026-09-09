@@ -29,7 +29,7 @@ const MobileSidebar = () => {
   };
 
   useEffect(()=>{
-    if(darkTheme == true){
+    if(darkTheme === true){
       document.body.className = "dark-theme"
     }else{
       document.body.className = "light-theme"
@@ -41,7 +41,7 @@ const MobileSidebar = () => {
       setBoardsOverview(prev => [...prev, newBoard.data])
       Navigate(`/board/${newBoard.data.id}`)
     }
-  }, [boardIsSuccess, newBoard]);
+  }, [boardIsSuccess, newBoard, Navigate, setBoardsOverview]);
 
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const MobileSidebar = () => {
         <h6 className='m-3'>ALL BOARDS ({boardsOverview?.length})</h6>
         <ul className='mobUl'>
           {boardsOverview?.map((link, ind) => (
-            <span key={ind} onClick={()=>{Navigate(`/board/${link.id}`)}} className={link.id == selectedBoard.id?"mobPlatform mobRow":"mobMarketing mobRow"}>
+            <span key={ind} onClick={()=>{Navigate(`/board/${link.id}`)}} className={link.id === selectedBoard?.id?"mobPlatform mobRow":"mobMarketing mobRow"}>
               <FontAwesomeIcon className='me-3 ms-3' icon={faTableList} rotation={180} />
               <li>{link.name}</li>
             </span>

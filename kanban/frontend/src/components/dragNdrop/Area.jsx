@@ -118,7 +118,7 @@ function Area() {
 
   useEffect(()=>{
       
-    if(Object.keys(selectedBoard).length !== 0){
+    if(selectedBoard && Object.keys(selectedBoard).length !== 0 && selectedBoard.columns){
       const obj = selectedBoard.columns.reduce((p,c)=>({...p, [c.id]:{...c}}),{})
       setColumns(obj)
 
@@ -129,25 +129,23 @@ function Area() {
       setColumnOrder(keys)
     }
 
-  },[selectedBoard])
+  },[selectedBoard, setColumnOrder, setColumns, setColumnsName])
 
   useEffect(() => {
-    if (columnIsSuccess) {
-      const data = newColumn;
-      const newId = data.data.id;
-      const newData = data.data;
-      const updatedColumns = { ...columns, [newId]: newData };
+    if (columnIsSuccess && newColumn?.data) {
+      const newId = newColumn.data.id;
+      const newData = newColumn.data;
 
       const newColumnName = {
         id: newId,
-        name: data.data.name
+        name: newColumn.data.name
       }
 
       setColumnOrder(prev => [...prev, newId]);
       setColumnsName(prev => [...prev, newColumnName]);
-      setColumns(updatedColumns)
+      setColumns(prev => ({ ...prev, [newId]: newData }));
     }
-  }, [columnIsSuccess, newColumn]);
+  }, [columnIsSuccess, newColumn, setColumnOrder, setColumns, setColumnsName]);
 
   const onColumnClose = () => {
     setColumnName("")
