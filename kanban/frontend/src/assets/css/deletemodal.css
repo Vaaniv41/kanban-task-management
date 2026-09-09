@@ -1,0 +1,70 @@
+.delete-modal{
+    display: flex;
+    flex-direction: column;
+    background-color: #2B2C37;
+    position: absolute;
+    height: 35dvh;
+    width:40dvw;
+    top: 30%;
+    bottom:3%;
+    left: 30dvw;
+    padding: 3%;
+    border-radius: 5px;
+    overflow-y: auto;
+  }
+  
+  .delete-modal-header h2{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      color: #EA5555;
+  }
+  
+  .delete-modal-body p{
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.8rem;
+      line-height: 1.3rem;
+      color: #828FA3;
+  }
+  
+  .delete-modal-footer{
+      margin-top: 3%;
+  }
+  
+  .delete-modal-footer .deletebtn{
+      color: #fff;
+      width: 40%;
+      height: 35px;
+      border: none;
+      background: #EA5555;
+      border-radius: 20px;
+  }
+  .delete-modal-footer .cancelbtn{
+      color: #fff;
+      width: 40%;
+      margin-left: 15px;
+      height: 35px;
+      border: none;
+      background:  rgba(99, 95, 199, 0.1);
+      border-radius: 20px;
+  }
+
+  @media only screen and (max-width: 769px) {
+    .delete-modal{
+      height: 35dvh;
+      width: 60dvw;
+      left: 20dvw;
+      padding: 3%;
+    }
+  }
+  
+  @media only screen and (max-width: 550px) {
+    .delete-modal{
+      height: 38dvh;
+      width:70dvw;
+      left: 20dvw;
+      padding: 4%;
+    }
+  }
