@@ -1,0 +1,888 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {             
+  width: 10px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(167, 166, 167, 0.2);
+  border-radius: 25px;
+  padding-left: 12px;
+}
+
+:root{
+--delete-btn-color: #EA5555;
+--Plus-Jakarta-Sans:'Plus Jakarta Sans', sans-serif;
+}
+
+.disable-btn-bg{
+  background-color: var(--disable-btn-color) !important;
+}
+
+.light-theme{
+  --header-color: #fff;
+  --sidebar-color: #fff;
+  --border-color: #E4EBFA;
+  --area-background-color: #f5f7fc;
+  --nonactive-background-color: #eeeff8;
+  --btn-color:#635FC7;
+  --theme-mode-color: #F4F7FD;
+  --header-text-color: #000112;
+  --disable-btn-color: #d9d6f1;
+  --dropdown-menu-color: #fff;
+  --modal-background-color: #fff;
+  --modal-label-color: #828FA3;
+  --modal-text-color: #000112;
+  --subtask-btn-color: rgba(99, 95, 199, 0.1);
+  --subtask-Hview-color: #828FA3;
+  --subtask-bg-color: #F4F7FD;
+}
+.dark-theme{
+  --header-color: #2B2C37;
+  --sidebar-color: #2B2C37;
+  --border-color: #3E3F4E;
+  --area-background-color: #20212c;
+  --nonactive-background-color: #fff;
+  --btn-color:#635FC7;
+  --theme-mode-color: #20212C;
+  --header-text-color: #fff;
+  --disable-btn-color: #38385b;
+  --dropdown-menu-color: #20212C;
+  --modal-background-color: #2B2C37;
+  --modal-label-color: #fff;
+  --modal-text-color: #fff;
+  --subtask-btn-color: #fff;
+  --subtask-Hview-color: #fff;
+  --subtask-bg-color: #20212C;
+}
+
+/* Header CSS */
+
+.mainDiv{
+  background-color: var(--header-color);
+  height: 10dvh;
+  display:flex ;
+  flex-direction: row;
+}
+
+.sidebr{
+  height: 100%;
+  border-right: 1px solid var(--border-color);
+}
+
+.borderBottom{
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo >.line{
+  height: 25px;
+  width: 6px;
+  border-radius: 2px;
+  background-color: var(--btn-color);
+}
+
+.logo >.line:nth-child(2){
+  background-color: #615fc7a1;
+}
+
+.logo >.line:nth-child(3){
+  background-color: #615fc763;
+}
+
+.rightSide{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10dvh;
+}
+
+.headerBar{
+  color: var(--header-text-color);
+  padding-left: 3%;
+}
+
+.mob-logo{
+  display:flex;
+  align-items: center;
+}
+
+.mob-logo .logo{
+  padding-top: 0px;
+  padding-right: 5px;
+}
+
+.menuBtn{
+  padding-right: 2%;
+}
+
+.newTaskBtn{
+  width: 10rem;
+  height: 2.4rem;
+  background-color: #635FC7;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+  .newTaskBtn{
+    width: 2.3rem;
+    height: 2rem;
+  }
+}
+
+.elipses{
+  padding-left: 8px;
+}
+
+.dropbtn {
+  padding: 5px 7px 0px 7px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right:0;
+  background-color: var(--dropdown-menu-color);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content .editbtn {
+  color:#828FA3;
+}
+
+.dropdown-content .editbtn span:hover {
+  color:rgb(130, 143, 163,0.5) !important;
+}
+
+.dropdown-content .deletebtn {
+  color:#EA5555;
+}
+
+.dropdown-content .deletebtn span:hover {
+  color:rgb(234, 85, 85, 0.5) !important;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  left: -5rem;
+}
+
+.mob-menu{
+  min-width: 13rem;
+}
+
+.all-menu{
+  min-width: 160px;
+  transform: translateX(-35%);
+}
+
+/* Header CSS */
+/*  */
+/*  */
+/*  */
+/* Main Component */
+
+#main-row{
+  --bs-gutter-x: 0rem !important;
+}
+
+.main-area{
+  background-color: var(--area-background-color);
+}
+
+/* Main Component */
+/*  */
+/*  */
+/*  */
+/* sideBar start */
+
+.sidebar{
+  border-right: 1px solid var(--border-color);
+}
+
+ul{
+  list-style: none;
+}
+
+.logo{
+  display: flex;
+  gap: 2px;
+  padding-top: 5%;
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  height: 90dvh;
+  border-right: 1px solid var(--border-color);
+  margin-right: 0px !important;
+  background-color: var(--sidebar-color);
+}
+
+.logoimg{
+  height: 25px;
+}
+/* logo end */
+
+/* Tital start */
+.row .sidebar h2{
+  font-family: var(--Plus-Jakarta-Sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2.4000000953674316px;
+  text-align: left;
+  color:#828FA3;
+  margin-top: 13%;
+}
+/* Tital end */
+
+/* Order list start */
+.row .sidebar ul{
+  margin-top: 2%;
+  padding-left: 0%;
+}
+
+.row .sidebar ul span{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 0.8rem;
+  text-align: left;
+}
+
+.row .sidebar ul span:hover{
+  cursor: pointer;
+}
+
+.Marketing, .Board{
+  padding: 15px 0px 15px 0px;
+}
+
+.Marketing{
+  color: #838fa3;
+}
+
+.Marketing:hover, .Board:hover{
+  background-color: var(--nonactive-background-color);
+  padding: 15px 0px 15px 0px;
+  border-top-right-radius:50px ;
+  border-bottom-right-radius:50px ;
+  color: var(--btn-color) !important;
+}
+
+.Platform-Launch {
+background-color: var(--btn-color);
+padding: 15px 0px 15px 0px;
+border-top-right-radius:50px ;
+border-bottom-right-radius:50px ;
+color: #ffffff !important;
+}
+
+.Board {
+  color: var(--btn-color);
+}
+
+.mobUl{
+  padding: 0;
+}
+
+.mobRow{
+  display: flex;
+  align-items: center;
+}
+
+.mobMarketing{
+  color: #838fa3;
+}
+
+.mobMarketing:hover, .mobBoard:hover{
+  background-color: var(--nonactive-background-color);
+  padding: 5px 0px 5px 0px;
+  border-top-right-radius:50px ;
+  border-bottom-right-radius:50px ;
+  color: var(--btn-color) !important;
+}
+
+.mobPlatform {
+background-color: var(--btn-color);
+padding: 5px 0px 5px 0px;
+border-top-right-radius:50px ;
+border-bottom-right-radius:50px ;
+color: #ffffff !important;
+}
+
+.mobBoard {
+  display: flex;
+  align-items: center;
+  color: var(--btn-color);
+}
+
+.mobMarketing, .mobBoard{
+  padding: 5px 0px 5px 0px;
+}
+
+/* Order list end*/
+
+/* footer start */
+.footer .mode{
+width: 90%;
+height: 48px;
+background-color: var(--theme-mode-color);
+border-radius: 5px; 
+display: flex;
+padding: 0px 30px 0px 30px;
+}
+
+.between-mode{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer .mode {
+  color:#838fa3;
+  font-size: 22px;
+}
+
+.btnHS{
+  width: 15%;
+}
+
+.sider{
+  color:#828FA3;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 19px;
+  /* margin: 0 auto; */
+  cursor: pointer;
+}
+
+.sider span{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 0.8rem;
+  text-align: left;
+}
+
+/* footer end */
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 26px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #635FC7;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #635FC7;
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #635FC7;
+}
+
+input:checked + .toggle-slider::before {
+  transform: translateX(26px);
+}
+
+/* sideBar end */
+/*  */
+/*  */
+/*  */
+
+/*  */
+/*  */
+/*  */
+/* Modal CSS */
+
+.overlay-modalss{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.modalss{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--modal-background-color);
+  position: absolute;
+  height: 90dvh;
+  width: 35dvw;
+  top: 3.5%;
+  bottom:3%;
+  left: 30dvw;
+  padding: 2%;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.modalss form{
+  height: 90dvh;
+  display: flex;
+  flex-direction: column
+}
+
+.modal-header h2{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 23px;
+  color:var(--header-text-color);
+}
+
+.modal-body{
+  flex-grow: 1;
+}
+
+.modal-body h6:first-child{
+  color: var(--modal-label-color);
+  margin-top: 10px;
+}
+
+.modal-body h6{
+  color: var(--modal-label-color);
+  margin-top: 15px;
+  display: flex;
+}
+
+.modal-body input{
+  width: 100%;
+  height: 2rem;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid rgb(130, 143, 163, 0.25);
+  color: var(--modal-text-color);
+}
+
+.modal-body textarea{
+  background-color: transparent;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid rgb(130, 143, 163, 0.25);
+  color: var(--modal-text-color);
+}
+
+.modal-body .subtask-input{
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body .subtask-input input{
+  margin-bottom: 7px;
+  width: 92%;
+}
+
+.modal-body .subtask-input .subtask-close{
+  margin-left: 2%;
+  color: #828FA3;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-body select{
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgb(130, 143, 163, 0.25);
+  background-color: transparent;
+  color: var(--modal-text-color)
+}
+
+.modal-body .newSubtaskbtn{
+  width: 100%;
+  height: 2.2rem;
+  font-weight: 700;
+  color: var(--btn-color);
+  background-color: var(--subtask-btn-color);
+  border: none;
+  border-radius: 24px;
+  margin-top: 5px;
+}
+
+.createTask{
+  width: 100%;
+  height: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #635FC7;
+  border: none;
+  border-radius: 24px;
+}
+
+.view-task-modal{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--modal-background-color);
+  position: absolute;
+  height: 50dvh;
+  width: 35dvw;
+  top: 20%;
+  bottom:3%;
+  left: 30dvw;
+  padding: 2%;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.view-modal-desc{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: #828FA3;
+}
+
+.view-modal-subt{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 0.9rem;
+  color: var(--subtask-Hview-color);
+}
+
+.subtasks-view{
+  display: flex;
+  background: var(--subtask-bg-color);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.subtasks-view p{
+  margin-bottom:0px;
+  margin-left: 5px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 0.9rem;
+  color: var(--modal-text-color);
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+
+.line-through{
+  text-decoration-line: line-through;
+}
+
+.column-modal{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--modal-background-color);
+  position: absolute;
+  height: 32dvh;
+  width: 30dvw;
+  top: 30%;
+  left: 35dvw;
+  padding: 2%;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.board-modal{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--modal-background-color);
+  position: absolute;
+  height: 60dvh;
+  width: 35dvw;
+  top: 20%;
+  bottom:3%;
+  left: 30dvw;
+  padding: 2%;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.board-modal form{
+  height: 60dvh;
+  display: flex;
+  flex-direction: column
+}
+
+.board-modal .modal-footer{
+    margin-top:15px
+}
+
+@media only screen and (max-width: 769px) {
+
+  .modalss{
+    height: 95dvh;
+    width: 50dvw;
+    top: 3%;
+    bottom:2%;
+    left: 25dvw;
+  }
+
+  .view-task-modal{
+    height: 50dvh;
+    width: 50dvw;
+    top: 3%;
+    bottom:2%;
+    left: 25dvw;
+  }
+
+  .modal-body .newSubtaskbtn{
+    height: 1.7rem;
+  }
+
+  .createTask{
+    height: 1.7rem;
+  }
+
+  .delete-modal{
+    height: 35dvh;
+    width: 60dvw;
+    left: 20dvw;
+    padding: 3%;
+  }
+
+  .column-modal{
+    height: 37dvh;
+    width: 60dvw;
+    left: 20dvw;
+    padding: 3%;
+  }
+
+  .board-modal{
+    height: 60dvh;
+    width: 50dvw;
+    left: 25dvw;
+    padding: 3%;
+  }
+
+
+}
+
+@media only screen and (max-width: 550px) {
+
+  .modalss{
+    height: 95dvh;
+    width: 70dvw;
+    top: 2.5%;
+    bottom:2%;
+    left: 15dvw;
+  }
+
+  .modal-body .newSubtaskbtn{
+    height: 1.7rem;
+  }
+
+  .createTask{
+    height: 1.7rem;
+  }
+
+  .delete-modal{
+    height: 35dvh;
+    width:70dvw;
+    left: 20dvw;
+    padding: 3%;
+  }
+
+  .column-modal{
+    height: 33dvh;
+    width:70dvw;
+    left: 15dvw;
+    padding: 4%;
+  }
+  
+  .board-modal{
+    height: 70dvh;
+    width:70dvw;
+    left: 15dvw;
+    padding: 4%;
+    top:13%;
+  }
+}
+
+/* Modal CSS */
+/*  */
+/*  */
+/*  */
+/* Card CSS */
+
+.cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 30px auto;
+  width: 300px;
+  height: 300px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.card .card_image {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+}
+
+.card .card_image img {
+  width: inherit;
+  height: inherit;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.card .card_title {
+  text-align: center;
+  border-radius: 0px 0px 40px 40px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: -80px;
+  height: 40px;
+}
+
+.card:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+
+.title-white {
+  color: white;
+}
+
+.title-black {
+  color: black;
+}
+
+@media all and (max-width: 500px) {
+  .card-list {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}
+
+
+/* Card CSS */
+/*  */
+/*  */
+/*  */
+/* Chart CSS */
+
+.canva-heading{
+  font-weight: bolder;
+  text-align: center;
+  cursor: pointer;
+}
+
+.canva-heading:hover{
+  color: #635FC7;
+  text-decoration: underline;
+}
+
+.canvasjs-chart-canvas{
+  width:80%;
+}
+
+.chart-ul{
+  margin-top: 15%;
+  width:20%;
+}
+
+.legend {
+  bottom: 0;
+  left: 0;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.completed-color {
+  width: 15px;
+  height: 15px;
+  background-color: #4f81bc;
+}
+
+.not-completed-color {
+  width: 15px;
+  height: 15px;
+  background-color: #c0504e;
+}
+
+@media all and (max-width: 500px) {
+  .canvasjs-chart-canvas{
+    width:70%;
+  }
+  .chart-ul{
+    width:25%;
+  }
+}
+/* Chart CSS */
