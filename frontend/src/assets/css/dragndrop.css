@@ -1,0 +1,170 @@
+.light-theme{
+    --modal-background-color: #fff;
+    --modal-text-color: #000112;
+    --add-coloumn-bg-color: linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.5) 100%);
+}
+.dark-theme{
+    --modal-background-color: #2B2C37;
+    --modal-text-color: #fff;
+    --add-coloumn-bg-color: linear-gradient(180deg, rgba(43, 44, 55, 0.25) 0%, rgba(43, 44, 55, 0.125) 100%);
+}
+
+/*  */
+/*  */
+/*  */
+/* Area CSS */
+
+/* Populated Area */
+
+.populated-area{
+    display: flex;
+    height: 90dvh;
+    padding: 1%;
+    overflow: auto;
+}
+
+.task-col{
+    height: 84dvh;  
+    width: 15rem;
+    margin-right: 10px;
+}
+
+.task-col .col-header{
+    display: flex;
+    height: 5dvh;
+    align-items: center;
+    gap: 5px !important;
+}
+  
+.col-header h4{
+    color: #828FA3;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 0.3rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 0px;
+}
+  
+.col-header .col-icon{
+    font-size: 0.8rem;
+}
+
+.task-col .col-body {
+    height: 80dvh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    padding: 1%;
+}
+
+.addColumn{
+    height: 83dvh;
+    width: 12rem;
+    padding-top: 45dvh;
+    background: var(--add-coloumn-bg-color);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.addColumn p{
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1rem;
+    color: #828FA3;
+}
+
+/* Populated Area */
+/*  */
+/*  */
+/* Tasks CSS */
+
+.task-container {
+    background-color: var(--modal-background-color);
+    padding: 20px 15px;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+    margin: 0px 5px 0px 0px;
+}
+
+.task-heading{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--modal-text-color);
+}
+
+.task-subtasks{
+    margin: 0px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color: #828FA3;
+}
+
+/* Tasks CSS */
+/*  */
+/*  */
+/* Empty Area */
+  
+.mainArea{
+display: flex;
+justify-content: center;
+height: 90dvh;
+}
+
+.empty{
+position: absolute;
+top: 50%;
+text-align: center;
+}
+
+.emptyPara{
+font-style: normal;
+font-weight: 600;
+font-size: 1rem;
+line-height: 0.9rem;
+color: #828FA3;
+}
+
+.addNewColBtn{
+width: 10rem;
+height: 2.5rem;
+color: #fff;
+background-color: #635FC7;
+border: none;
+border-radius: 24px;
+}
+
+.eye-button {
+position: fixed;
+bottom: 20px;
+left: 0px;
+width: 40px;
+height: 40px;
+border-top-right-radius:50px ;
+border-bottom-right-radius:50px ;
+background-color: #635FC7;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+z-index: 9999;
+}
+
+.eye-button svg{
+font-size: 20px;
+color: #fff;
+}  
+
+/* Empty Area */
+
+/*  */
+/*  */
+
+/* Area CSS */
