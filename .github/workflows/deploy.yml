@@ -1,0 +1,110 @@
+name: Kanban CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  ECR_BACKEND_REPO: ${{ vars.ECR_BACKEND_REPO }}
+  ECR_FRONTEND_REPO: ${{ vars.ECR_FRONTEND_REPO }}
+  ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+  ECS_BACKEND_SERVICE: ${{ vars.ECS_BACKEND_SERVICE }}
+  ECS_FRONTEND_SERVICE: ${{ vars.ECS_FRONTEND_SERVICE }}
+
+jobs:
+  deploy:
+    name: Build and Deploy to AWS
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Get the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Authenticate GitHub Actions with AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # 3. Login to Amazon ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # 4. Get AWS account ECR registry
+      - name: Set ECR registry
+        id: ecr
+        run: |
+          echo "registry=598606890027.dkr.ecr.${AWS_REGION}.amazonaws.com" >> "$GITHUB_OUTPUT"
+
+      # 5. Build backend Docker image
+      - name: Build backend image
+        run: |
+          docker build \
+            -t ${{ steps.ecr.outputs.registry }}/${ECR_BACKEND_REPO}:latest \
+            ./backend
+
+      # 6. Push backend image to ECR
+      - name: Push backend image
+        run: |
+          docker push \
+            ${{ steps.ecr.outputs.registry }}/${ECR_BACKEND_REPO}:latest
+
+      # 7. Build frontend Docker image
+      - name: Build frontend image
+        run: |
+          docker build \
+            --build-arg REACT_APP_BASEURL=http://kanban-alb-791692059.ap-south-1.elb.amazonaws.com \
+            -t ${{ steps.ecr.outputs.registry }}/${ECR_FRONTEND_REPO}:latest \
+            ./frontend
+
+      # 8. Push frontend image to ECR
+      - name: Push frontend image
+        run: |
+          docker push \
+            ${{ steps.ecr.outputs.registry }}/${ECR_FRONTEND_REPO}:latest
+
+      # 9. Force ECS backend deployment
+      - name: Deploy backend to ECS
+        run: |
+          aws ecs update-service \
+            --cluster "$ECS_CLUSTER" \
+            --service "$ECS_BACKEND_SERVICE" \
+            --force-new-deployment
+
+      # 10. Force ECS frontend deployment
+      - name: Deploy frontend to ECS
+        run: |
+          aws ecs update-service \
+            --cluster "$ECS_CLUSTER" \
+            --service "$ECS_FRONTEND_SERVICE" \
+            --force-new-deployment
+
+      # 11. Wait for backend deployment
+      - name: Wait for backend service
+        run: |
+          aws ecs wait services-stable \
+            --cluster "$ECS_CLUSTER" \
+            --services "$ECS_BACKEND_SERVICE"
+
+      # 12. Wait for frontend deployment
+      - name: Wait for frontend service
+        run: |
+          aws ecs wait services-stable \
+            --cluster "$ECS_CLUSTER" \
+            --services "$ECS_FRONTEND_SERVICE"
+
+      # 13. Success
+      - name: Deployment successful
+        run: |
+          echo "========================================="
+          echo "Kanban CI/CD deployment successful!"
+          echo "========================================="
