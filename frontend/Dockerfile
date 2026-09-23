@@ -9,8 +9,11 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build
+# API base URL is supplied during Docker build
+ARG REACT_APP_BASEURL
+ENV REACT_APP_BASEURL=$REACT_APP_BASEURL
 
+RUN npm run build
 
 # Stage 2: Serve React application
 FROM nginx:alpine
