@@ -24,24 +24,22 @@ jobs:
 
     steps:
 
-      # 1. Get the code from GitHub
+      # 1. Checkout source code
       - name: Checkout code
         uses: actions/checkout@v4
 
-    
-
-      # 2. Authenticate GitHub Actions with AWS
+      # 2. Authenticate GitHub Actions with AWS using OIDC
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       # 3. Login to Amazon ECR
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      # 4. Get AWS account ECR registry
+      # 4. Set ECR registry
       - name: Set ECR registry
         id: ecr
         run: |
@@ -52,7 +50,7 @@ jobs:
         run: |
           docker build \
             -t ${{ steps.ecr.outputs.registry }}/${ECR_BACKEND_REPO}:latest \
-            ./backend
+            .
 
       # 6. Push backend image to ECR
       - name: Push backend image
@@ -74,7 +72,7 @@ jobs:
           docker push \
             ${{ steps.ecr.outputs.registry }}/${ECR_FRONTEND_REPO}:latest
 
-      # 9. Force ECS backend deployment
+      # 9. Force backend Fargate deployment
       - name: Deploy backend to ECS
         run: |
           aws ecs update-service \
@@ -82,7 +80,7 @@ jobs:
             --service "$ECS_BACKEND_SERVICE" \
             --force-new-deployment
 
-      # 10. Force ECS frontend deployment
+      # 10. Force frontend Fargate deployment
       - name: Deploy frontend to ECS
         run: |
           aws ecs update-service \
@@ -104,7 +102,7 @@ jobs:
             --cluster "$ECS_CLUSTER" \
             --services "$ECS_FRONTEND_SERVICE"
 
-      # 13. Success
+      # 13. Deployment successful
       - name: Deployment successful
         run: |
           echo "========================================="
