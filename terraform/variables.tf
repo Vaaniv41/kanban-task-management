@@ -33,3 +33,19 @@ variable "private_subnet_cidrs" {
   type        = list(string)
   default     = ["10.0.10.0/24", "10.0.11.0/24"]
 }
+
+variable "db_name" {
+  description = "Kanban PostgreSQL database name"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Kanban PostgreSQL username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Kanban PostgreSQL password"
+  type        = string
+  sensitive   = true
+}

@@ -125,3 +125,45 @@ resource "aws_route_table_association" "private_2" {
   subnet_id      = aws_subnet.private_2.id
   route_table_id = aws_route_table.private.id
 }
+
+module "security" {
+  source = "./modules/security"
+
+  vpc_id = aws_vpc.main.id
+
+  frontend_port = 3000
+  backend_port  = 4000
+  database_port = 5432
+}
+
+module "database" {
+  source = "./modules/database"
+
+  database_subnet_ids = [
+    aws_subnet.private_1.id,
+    aws_subnet.private_2.id
+  ]
+
+  rds_security_group_id = module.security.rds_security_group_id
+
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+  db_port     = 5432
+}
+
+module "alb" {
+  source = "./modules/alb"
+
+  vpc_id = aws_vpc.main.id
+
+  public_subnet_ids = [
+    aws_subnet.public_1.id,
+    aws_subnet.public_2.id
+  ]
+
+  alb_security_group_id = module.security.alb_security_group_id
+
+  frontend_port = 3000
+  backend_port  = 4000
+}
