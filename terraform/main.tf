@@ -1,4 +1,7 @@
-# 1. Create the VPC
+# ============================================================
+# 1. VPC
+# ============================================================
+
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = true
@@ -9,7 +12,10 @@ resource "aws_vpc" "main" {
   }
 }
 
-# 2. Public Subnets (across 2 Availability Zones)
+# ============================================================
+# 2. PUBLIC SUBNETS
+# ============================================================
+
 resource "aws_subnet" "public_1" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.1.0/24"
@@ -32,7 +38,10 @@ resource "aws_subnet" "public_2" {
   }
 }
 
-# 3. Private Subnets (across 2 Availability Zones)
+# ============================================================
+# 3. PRIVATE SUBNETS
+# ============================================================
+
 resource "aws_subnet" "private_1" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.10.0/24"
@@ -53,7 +62,10 @@ resource "aws_subnet" "private_2" {
   }
 }
 
-# 4. Internet Gateway (IGW) for Public Traffic
+# ============================================================
+# 4. INTERNET GATEWAY
+# ============================================================
+
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
@@ -62,23 +74,43 @@ resource "aws_internet_gateway" "gw" {
   }
 }
 
-# 5. Elastic IP & NAT Gateway (allows private subnets outbound internet access)
+# ============================================================
+# 5. ELASTIC IP FOR NAT GATEWAY
+# ============================================================
+
 resource "aws_eip" "nat" {
-  domain     = "vpc"
-  depends_on = [aws_internet_gateway.gw]
+  domain = "vpc"
+
+  depends_on = [
+    aws_internet_gateway.gw
+  ]
+
+  tags = {
+    Name = "kanban-nat-eip"
+  }
 }
+
+# ============================================================
+# 6. NAT GATEWAY
+# ============================================================
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public_1.id
+
+  depends_on = [
+    aws_internet_gateway.gw
+  ]
 
   tags = {
     Name = "kanban-nat"
   }
 }
 
-# 6. Route Tables & Associations
-# Public Route Table -> Internet Gateway
+# ============================================================
+# 7. PUBLIC ROUTE TABLE
+# ============================================================
+
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -92,6 +124,10 @@ resource "aws_route_table" "public" {
   }
 }
 
+# ============================================================
+# 8. PUBLIC ROUTE TABLE ASSOCIATIONS
+# ============================================================
+
 resource "aws_route_table_association" "public_1" {
   subnet_id      = aws_subnet.public_1.id
   route_table_id = aws_route_table.public.id
@@ -102,7 +138,10 @@ resource "aws_route_table_association" "public_2" {
   route_table_id = aws_route_table.public.id
 }
 
-# Private Route Table -> NAT Gateway
+# ============================================================
+# 9. PRIVATE ROUTE TABLE
+# ============================================================
+
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
@@ -116,6 +155,10 @@ resource "aws_route_table" "private" {
   }
 }
 
+# ============================================================
+# 10. PRIVATE ROUTE TABLE ASSOCIATIONS
+# ============================================================
+
 resource "aws_route_table_association" "private_1" {
   subnet_id      = aws_subnet.private_1.id
   route_table_id = aws_route_table.private.id
@@ -126,6 +169,10 @@ resource "aws_route_table_association" "private_2" {
   route_table_id = aws_route_table.private.id
 }
 
+# ============================================================
+# 11. SECURITY MODULE
+# ============================================================
+
 module "security" {
   source = "./modules/security"
 
@@ -135,6 +182,10 @@ module "security" {
   backend_port  = 4000
   database_port = 5432
 }
+
+# ============================================================
+# 12. DATABASE MODULE
+# ============================================================
 
 module "database" {
   source = "./modules/database"
@@ -147,11 +198,16 @@ module "database" {
   rds_security_group_id = module.security.rds_security_group_id
 
   snapshot_identifier = var.snapshot_identifier
-  db_name             = var.db_name
-  db_username         = var.db_username
-  db_password         = var.db_password
-  db_port             = 5432
+
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+  db_port     = 5432
 }
+
+# ============================================================
+# 13. APPLICATION LOAD BALANCER MODULE
+# ============================================================
 
 module "alb" {
   source = "./modules/alb"
@@ -168,6 +224,10 @@ module "alb" {
   frontend_port = 80
   backend_port  = 4000
 }
+
+# ============================================================
+# 14. ECS MODULE
+# ============================================================
 
 module "ecs" {
   source = "./modules/ecs"

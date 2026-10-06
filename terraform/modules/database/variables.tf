@@ -31,7 +31,7 @@ variable "db_port" {
 }
 
 variable "snapshot_identifier" {
-  description = "Optional DB snapshot identifier to restore from"
+  description = "RDS snapshot to restore from"
   type        = string
   default     = null
 }
