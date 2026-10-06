@@ -13,13 +13,14 @@ resource "aws_db_instance" "kanban" {
   engine         = "postgres"
   instance_class = "db.t3.micro"
 
-  allocated_storage = 20
+  allocated_storage = var.snapshot_identifier == null ? 20 : null
   storage_type      = "gp3"
 
-  db_name  = var.db_name
-  username = var.db_username
-  password = var.db_password
-  port     = var.db_port
+  snapshot_identifier = var.snapshot_identifier
+  db_name             = var.snapshot_identifier == null ? var.db_name : null
+  username            = var.snapshot_identifier == null ? var.db_username : null
+  password            = var.db_password
+  port                = var.db_port
 
   db_subnet_group_name   = aws_db_subnet_group.kanban.name
   vpc_security_group_ids = [var.rds_security_group_id]

@@ -15,7 +15,7 @@ resource "aws_lb" "kanban" {
 }
 
 resource "aws_lb_target_group" "frontend" {
-  name        = "kanban-frontend-tg"
+  name_prefix = "kfe-"
   port        = var.frontend_port
   protocol    = "HTTP"
   target_type = "ip"
@@ -35,6 +35,10 @@ resource "aws_lb_target_group" "frontend" {
   tags = {
     Name = "kanban-frontend-tg"
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_lb_target_group" "backend" {
@@ -46,7 +50,7 @@ resource "aws_lb_target_group" "backend" {
 
   health_check {
     enabled             = true
-    path                = "/"
+    path                = "/health"
     protocol            = "HTTP"
     matcher             = "200-399"
     interval            = 30

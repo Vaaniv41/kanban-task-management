@@ -87,6 +87,11 @@ variable "db_endpoint" {
   type        = string
 }
 
+variable "db_address" {
+  description = "RDS database hostname address"
+  type        = string
+}
+
 variable "db_port" {
   description = "PostgreSQL database port"
   type        = number

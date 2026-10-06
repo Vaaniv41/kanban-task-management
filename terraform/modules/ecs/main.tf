@@ -7,6 +7,26 @@ resource "aws_ecs_cluster" "kanban" {
   }
 }
 
+resource "aws_cloudwatch_log_group" "frontend" {
+  name              = "/ecs/kanban-frontend"
+  retention_in_days = 7
+
+  tags = {
+    Name        = "kanban-frontend-logs"
+    Environment = var.environment
+  }
+}
+
+resource "aws_cloudwatch_log_group" "backend" {
+  name              = "/ecs/kanban-backend"
+  retention_in_days = 7
+
+  tags = {
+    Name        = "kanban-backend-logs"
+    Environment = var.environment
+  }
+}
+
 resource "aws_ecs_task_definition" "frontend" {
   family                   = "kanban-frontend-task"
   network_mode             = "awsvpc"
@@ -30,6 +50,15 @@ resource "aws_ecs_task_definition" "frontend" {
           protocol      = "tcp"
         }
       ]
+
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group"         = aws_cloudwatch_log_group.frontend.name
+          "awslogs-region"        = var.aws_region
+          "awslogs-stream-prefix" = "frontend"
+        }
+      }
     }
   ])
 
@@ -63,10 +92,19 @@ resource "aws_ecs_task_definition" "backend" {
         }
       ]
 
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group"         = aws_cloudwatch_log_group.backend.name
+          "awslogs-region"        = var.aws_region
+          "awslogs-stream-prefix" = "backend"
+        }
+      }
+
       environment = [
         {
           name  = "DB_HOST"
-          value = var.db_endpoint
+          value = var.db_address
         },
         {
           name  = "DB_PORT"
@@ -83,6 +121,10 @@ resource "aws_ecs_task_definition" "backend" {
         {
           name  = "DB_PASSWORD"
           value = var.db_password
+        },
+        {
+          name  = "DATABASE_URL"
+          value = "postgresql://${var.db_username}:${var.db_password}@${var.db_endpoint}/${var.db_name}?schema=public"
         }
       ]
     }

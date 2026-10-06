@@ -29,3 +29,9 @@ variable "db_port" {
   type        = number
   default     = 5432
 }
+
+variable "snapshot_identifier" {
+  description = "Optional DB snapshot identifier to restore from"
+  type        = string
+  default     = null
+}

@@ -1,0 +1,2193 @@
+{
+  "version": 4,
+  "terraform_version": "1.15.7",
+  "serial": 8,
+  "lineage": "bd8ecdb3-57fa-7d61-7c4e-90796964fce9",
+  "outputs": {
+    "nat_gateway_public_ip": {
+      "value": "13.206.34.202",
+      "type": "string"
+    },
+    "private_subnet_ids": {
+      "value": [
+        "subnet-0e56c19fe12a7fc66",
+        "subnet-0eb96863bfaf7a75c"
+      ],
+      "type": [
+        "tuple",
+        [
+          "string",
+          "string"
+        ]
+      ]
+    },
+    "public_subnet_ids": {
+      "value": [
+        "subnet-066a8564e0653e318",
+        "subnet-0b8448684e266bde1"
+      ],
+      "type": [
+        "tuple",
+        [
+          "string",
+          "string"
+        ]
+      ]
+    },
+    "vpc_cidr_block": {
+      "value": "10.0.0.0/16",
+      "type": "string"
+    },
+    "vpc_id": {
+      "value": "vpc-03259948cb6e8edd7",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "nat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-05305eb209ccb5044",
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:elastic-ip/eipalloc-05305eb209ccb5044",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-0a3d8109a94a0a82d",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-05305eb209ccb5044",
+            "instance": "",
+            "ipam_pool_id": "",
+            "network_border_group": "ap-south-1",
+            "network_interface": "eni-051d2e9aabf3e9de4",
+            "private_dns": "ip-10-0-1-207.ap-south-1.compute.internal",
+            "private_ip": "10.0.1.207",
+            "ptr_record": "",
+            "public_dns": "ec2-13-206-34-202.ap-south-1.compute.amazonaws.com",
+            "public_ip": "13.206.34.202",
+            "public_ipv4_pool": "amazon",
+            "region": "ap-south-1",
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "eipalloc-05305eb209ccb5044",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "gw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:internet-gateway/igw-0a9714da02bedd244",
+            "id": "igw-0a9714da02bedd244",
+            "owner_id": "598606890027",
+            "region": "ap-south-1",
+            "tags": {
+              "Name": "kanban-igw"
+            },
+            "tags_all": {
+              "Name": "kanban-igw"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "igw-0a9714da02bedd244",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_nat_gateway",
+      "name": "nat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-05305eb209ccb5044",
+            "association_id": "eipassoc-0a3d8109a94a0a82d",
+            "auto_provision_zones": null,
+            "auto_scaling_ips": null,
+            "availability_mode": "zonal",
+            "availability_zone_address": [],
+            "connectivity_type": "public",
+            "id": "nat-00adb4c7512feb4b5",
+            "network_interface_id": "eni-051d2e9aabf3e9de4",
+            "private_ip": "10.0.1.207",
+            "public_ip": "13.206.34.202",
+            "region": "ap-south-1",
+            "regional_nat_gateway_address": [],
+            "regional_nat_gateway_auto_mode": null,
+            "route_table_id": null,
+            "secondary_allocation_ids": [],
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-066a8564e0653e318",
+            "tags": {
+              "Name": "kanban-nat"
+            },
+            "tags_all": {
+              "Name": "kanban-nat"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "nat-00adb4c7512feb4b5",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.gw",
+            "aws_subnet.public_1",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:route-table/rtb-0839d134f8ae2dd06",
+            "id": "rtb-0839d134f8ae2dd06",
+            "owner_id": "598606890027",
+            "propagating_vgws": [],
+            "region": "ap-south-1",
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-00adb4c7512feb4b5",
+                "network_interface_id": "",
+                "odb_network_arn": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "private-rt"
+            },
+            "tags_all": {
+              "Name": "private-rt"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "rtb-0839d134f8ae2dd06",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.gw",
+            "aws_nat_gateway.nat",
+            "aws_subnet.public_1",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:route-table/rtb-024956a70a4e275e2",
+            "id": "rtb-024956a70a4e275e2",
+            "owner_id": "598606890027",
+            "propagating_vgws": [],
+            "region": "ap-south-1",
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-0a9714da02bedd244",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "odb_network_arn": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "public-rt"
+            },
+            "tags_all": {
+              "Name": "public-rt"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "rtb-024956a70a4e275e2",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "private_1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0425d14f4563e1cea",
+            "region": "ap-south-1",
+            "route_table_id": "rtb-0839d134f8ae2dd06",
+            "subnet_id": "subnet-0e56c19fe12a7fc66",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "rtbassoc-0425d14f4563e1cea",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.gw",
+            "aws_nat_gateway.nat",
+            "aws_route_table.private",
+            "aws_subnet.private_1",
+            "aws_subnet.public_1",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "private_2",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-03cfb473a3aa41fd7",
+            "region": "ap-south-1",
+            "route_table_id": "rtb-0839d134f8ae2dd06",
+            "subnet_id": "subnet-0eb96863bfaf7a75c",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "rtbassoc-03cfb473a3aa41fd7",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.gw",
+            "aws_nat_gateway.nat",
+            "aws_route_table.private",
+            "aws_subnet.private_2",
+            "aws_subnet.public_1",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public_1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-08d3397b801f2cca8",
+            "region": "ap-south-1",
+            "route_table_id": "rtb-024956a70a4e275e2",
+            "subnet_id": "subnet-066a8564e0653e318",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "rtbassoc-08d3397b801f2cca8",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_route_table.public",
+            "aws_subnet.public_1",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public_2",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0e606613348ee49ef",
+            "region": "ap-south-1",
+            "route_table_id": "rtb-024956a70a4e275e2",
+            "subnet_id": "subnet-0b8448684e266bde1",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "rtbassoc-0e606613348ee49ef",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_route_table.public",
+            "aws_subnet.public_2",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private_1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:subnet/subnet-0e56c19fe12a7fc66",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "ap-south-1a",
+            "availability_zone_id": "aps1-az1",
+            "cidr_block": "10.0.10.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0e56c19fe12a7fc66",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_ipam_pool_id": null,
+            "ipv6_native": false,
+            "ipv6_netmask_length": null,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "598606890027",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "region": "ap-south-1",
+            "tags": {
+              "Name": "private-subnet-1a"
+            },
+            "tags_all": {
+              "Name": "private-subnet-1a"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "subnet-0e56c19fe12a7fc66",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private_2",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:subnet/subnet-0eb96863bfaf7a75c",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "ap-south-1b",
+            "availability_zone_id": "aps1-az3",
+            "cidr_block": "10.0.11.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0eb96863bfaf7a75c",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_ipam_pool_id": null,
+            "ipv6_native": false,
+            "ipv6_netmask_length": null,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "598606890027",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "region": "ap-south-1",
+            "tags": {
+              "Name": "private-subnet-1b"
+            },
+            "tags_all": {
+              "Name": "private-subnet-1b"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "subnet-0eb96863bfaf7a75c",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public_1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:subnet/subnet-066a8564e0653e318",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "ap-south-1a",
+            "availability_zone_id": "aps1-az1",
+            "cidr_block": "10.0.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-066a8564e0653e318",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_ipam_pool_id": null,
+            "ipv6_native": false,
+            "ipv6_netmask_length": null,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "598606890027",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "region": "ap-south-1",
+            "tags": {
+              "Name": "public-subnet-1a"
+            },
+            "tags_all": {
+              "Name": "public-subnet-1a"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "subnet-066a8564e0653e318",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public_2",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:subnet/subnet-0b8448684e266bde1",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "ap-south-1b",
+            "availability_zone_id": "aps1-az3",
+            "cidr_block": "10.0.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0b8448684e266bde1",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_ipam_pool_id": null,
+            "ipv6_native": false,
+            "ipv6_netmask_length": null,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "598606890027",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "region": "ap-south-1",
+            "tags": {
+              "Name": "public-subnet-1b"
+            },
+            "tags_all": {
+              "Name": "public-subnet-1b"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "subnet-0b8448684e266bde1",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:vpc/vpc-03259948cb6e8edd7",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-0ab4f4ba4f2611384",
+            "default_route_table_id": "rtb-0f8244004a3079ba6",
+            "default_security_group_id": "sg-0e35040efeb8bb582",
+            "dhcp_options_id": "dopt-07ab94d7d464eca69",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-03259948cb6e8edd7",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-0f8244004a3079ba6",
+            "owner_id": "598606890027",
+            "region": "ap-south-1",
+            "tags": {
+              "Name": "kanban_vpc"
+            },
+            "tags_all": {
+              "Name": "kanban_vpc"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "vpc-03259948cb6e8edd7",
+            "region": "ap-south-1"
+          },
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb",
+      "name": "kanban",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:loadbalancer/app/kanban-alb/a7b020b50f0dc9fb",
+            "arn_suffix": "app/kanban-alb/a7b020b50f0dc9fb",
+            "client_keep_alive": 3600,
+            "connection_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "customer_owned_ipv4_pool": "",
+            "desync_mitigation_mode": "defensive",
+            "dns_name": "kanban-alb-1105265175.ap-south-1.elb.amazonaws.com",
+            "dns_record_client_routing_policy": null,
+            "drop_invalid_header_fields": false,
+            "enable_cross_zone_load_balancing": true,
+            "enable_deletion_protection": false,
+            "enable_http2": true,
+            "enable_prefix_for_ipv6_source_nat": "off",
+            "enable_tls_version_and_cipher_suite_headers": false,
+            "enable_waf_fail_open": false,
+            "enable_xff_client_port": false,
+            "enable_zonal_shift": false,
+            "enforce_security_group_inbound_rules_on_private_link_traffic": "",
+            "health_check_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:loadbalancer/app/kanban-alb/a7b020b50f0dc9fb",
+            "idle_timeout": 60,
+            "internal": false,
+            "ip_address_type": "ipv4",
+            "ipam_pools": [],
+            "load_balancer_type": "application",
+            "minimum_load_balancer_capacity": [],
+            "name": "kanban-alb",
+            "name_prefix": "",
+            "preserve_host_header": false,
+            "region": "ap-south-1",
+            "secondary_ips_auto_assigned_per_subnet": null,
+            "security_groups": [
+              "sg-0999bbad958b8e99d"
+            ],
+            "subnet_mapping": [
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-066a8564e0653e318"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-0b8448684e266bde1"
+              }
+            ],
+            "subnets": [
+              "subnet-066a8564e0653e318",
+              "subnet-0b8448684e266bde1"
+            ],
+            "tags": {
+              "Name": "kanban-alb"
+            },
+            "tags_all": {
+              "Name": "kanban-alb"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7",
+            "xff_header_processing_mode": "append",
+            "zone_id": "ZP97RAFLXTNZK"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:loadbalancer/app/kanban-alb/a7b020b50f0dc9fb"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_subnet.public_1",
+            "aws_subnet.public_2",
+            "aws_vpc.main",
+            "module.security.aws_security_group.alb"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_listener",
+      "name": "http",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "alpn_policy": null,
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995",
+            "certificate_arn": null,
+            "default_action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "jwt_validation": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kfe-f665d4e99bc1bfc75d0f7fad31/423b2d92a2e02c8e",
+                "type": "forward"
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995",
+            "load_balancer_arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:loadbalancer/app/kanban-alb/a7b020b50f0dc9fb",
+            "mutual_authentication": [],
+            "port": 80,
+            "protocol": "HTTP",
+            "region": "ap-south-1",
+            "routing_http_request_x_amzn_mtls_clientcert_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_issuer_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_leaf_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_subject_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_validity_header_name": null,
+            "routing_http_request_x_amzn_tls_cipher_suite_header_name": null,
+            "routing_http_request_x_amzn_tls_version_header_name": null,
+            "routing_http_response_access_control_allow_credentials_header_value": "",
+            "routing_http_response_access_control_allow_headers_header_value": "",
+            "routing_http_response_access_control_allow_methods_header_value": "",
+            "routing_http_response_access_control_allow_origin_header_value": "",
+            "routing_http_response_access_control_expose_headers_header_value": "",
+            "routing_http_response_access_control_max_age_header_value": "",
+            "routing_http_response_content_security_policy_header_value": "",
+            "routing_http_response_server_enabled": true,
+            "routing_http_response_strict_transport_security_header_value": "",
+            "routing_http_response_x_content_type_options_header_value": "",
+            "routing_http_response_x_frame_options_header_value": "",
+            "ssl_policy": "",
+            "tags": {},
+            "tags_all": {},
+            "tcp_idle_timeout_seconds": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6MzAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "aws_subnet.public_1",
+            "aws_subnet.public_2",
+            "aws_vpc.main",
+            "module.alb.aws_lb.kanban",
+            "module.alb.aws_lb_target_group.frontend",
+            "module.security.aws_security_group.alb"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_listener_rule",
+      "name": "backend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "jwt_validation": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kanban-backend-tg/f64ad9622d00f284",
+                "type": "forward"
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener-rule/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995/8a70191c55673947",
+            "condition": [
+              {
+                "host_header": [],
+                "http_header": [],
+                "http_request_method": [],
+                "path_pattern": [
+                  {
+                    "regex_values": [],
+                    "values": [
+                      "/api/*"
+                    ]
+                  }
+                ],
+                "query_string": [],
+                "source_ip": []
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener-rule/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995/8a70191c55673947",
+            "listener_arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995",
+            "priority": 100,
+            "region": "ap-south-1",
+            "tags": {},
+            "tags_all": {},
+            "transform": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:listener-rule/app/kanban-alb/a7b020b50f0dc9fb/091395389bb91995/8a70191c55673947"
+          },
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.public_1",
+            "aws_subnet.public_2",
+            "aws_vpc.main",
+            "module.alb.aws_lb.kanban",
+            "module.alb.aws_lb_listener.http",
+            "module.alb.aws_lb_target_group.backend",
+            "module.alb.aws_lb_target_group.frontend",
+            "module.security.aws_security_group.alb"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "backend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kanban-backend-tg/f64ad9622d00f284",
+            "arn_suffix": "targetgroup/kanban-backend-tg/f64ad9622d00f284",
+            "connection_termination": null,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 2,
+                "interval": 30,
+                "matcher": "200-399",
+                "path": "/health",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 5,
+                "unhealthy_threshold": 3
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kanban-backend-tg/f64ad9622d00f284",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancer_arns": [
+              "arn:aws:elasticloadbalancing:ap-south-1:598606890027:loadbalancer/app/kanban-alb/a7b020b50f0dc9fb"
+            ],
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_anomaly_mitigation": "off",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "kanban-backend-tg",
+            "name_prefix": "",
+            "port": 4000,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "region": "ap-south-1",
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": {
+              "Name": "kanban-backend-tg"
+            },
+            "tags_all": {
+              "Name": "kanban-backend-tg"
+            },
+            "target_control_port": 0,
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_group_health": [
+              {
+                "dns_failover": [
+                  {
+                    "minimum_healthy_targets_count": "1",
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ],
+                "unhealthy_state_routing": [
+                  {
+                    "minimum_healthy_targets_count": 1,
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ]
+              }
+            ],
+            "target_health_state": [
+              {
+                "enable_unhealthy_connection_termination": null,
+                "unhealthy_draining_interval": null
+              }
+            ],
+            "target_type": "ip",
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kanban-backend-tg/f64ad9622d00f284"
+          },
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.alb",
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kfe-f665d4e99bc1bfc75d0f7fad31/423b2d92a2e02c8e",
+            "arn_suffix": "targetgroup/kfe-f665d4e99bc1bfc75d0f7fad31/423b2d92a2e02c8e",
+            "connection_termination": null,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 2,
+                "interval": 30,
+                "matcher": "200-399",
+                "path": "/",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 5,
+                "unhealthy_threshold": 3
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kfe-f665d4e99bc1bfc75d0f7fad31/423b2d92a2e02c8e",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancer_arns": [
+              "arn:aws:elasticloadbalancing:ap-south-1:598606890027:loadbalancer/app/kanban-alb/a7b020b50f0dc9fb"
+            ],
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_anomaly_mitigation": "off",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "kfe-f665d4e99bc1bfc75d0f7fad31",
+            "name_prefix": "kfe-",
+            "port": 80,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "region": "ap-south-1",
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": {
+              "Name": "kanban-frontend-tg"
+            },
+            "tags_all": {
+              "Name": "kanban-frontend-tg"
+            },
+            "target_control_port": 0,
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_group_health": [
+              {
+                "dns_failover": [
+                  {
+                    "minimum_healthy_targets_count": "1",
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ],
+                "unhealthy_state_routing": [
+                  {
+                    "minimum_healthy_targets_count": 1,
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ]
+              }
+            ],
+            "target_health_state": [
+              {
+                "enable_unhealthy_connection_termination": null,
+                "unhealthy_draining_interval": null
+              }
+            ],
+            "target_type": "ip",
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kfe-f665d4e99bc1bfc75d0f7fad31/423b2d92a2e02c8e"
+          },
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_vpc.main"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "module": "module.database",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "kanban",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "address": "kanban-postgres.cr68ikwaoxzo.ap-south-1.rds.amazonaws.com",
+            "allocated_storage": 20,
+            "allow_major_version_upgrade": null,
+            "apply_immediately": false,
+            "arn": "arn:aws:rds:ap-south-1:598606890027:db:kanban-postgres",
+            "auto_minor_version_upgrade": true,
+            "availability_zone": "ap-south-1b",
+            "backup_retention_period": 0,
+            "backup_target": "region",
+            "backup_window": "20:27-20:57",
+            "blue_green_update": [],
+            "ca_cert_identifier": "rds-ca-rsa2048-g1",
+            "character_set_name": "",
+            "copy_tags_to_snapshot": false,
+            "custom_iam_instance_profile": "",
+            "customer_owned_ip_enabled": false,
+            "database_insights_mode": "standard",
+            "db_name": "kanban",
+            "db_subnet_group_name": "kanban-db-subnet-group",
+            "dedicated_log_volume": false,
+            "delete_automated_backups": true,
+            "deletion_protection": false,
+            "domain": "",
+            "domain_auth_secret_arn": "",
+            "domain_dns_ips": [],
+            "domain_fqdn": "",
+            "domain_iam_role_name": "",
+            "domain_ou": "",
+            "enabled_cloudwatch_logs_exports": [],
+            "endpoint": "kanban-postgres.cr68ikwaoxzo.ap-south-1.rds.amazonaws.com:5432",
+            "engine": "postgres",
+            "engine_lifecycle_support": "open-source-rds-extended-support",
+            "engine_version": "18.3",
+            "engine_version_actual": "18.3",
+            "final_snapshot_identifier": null,
+            "hosted_zone_id": "Z2VFMSZA74J7XZ",
+            "iam_database_authentication_enabled": false,
+            "id": "db-S4A3MNW6VLQAJV6537NAUZ7D4I",
+            "identifier": "kanban-postgres",
+            "identifier_prefix": "",
+            "instance_class": "db.t3.micro",
+            "iops": 3000,
+            "kms_key_id": "",
+            "latest_restorable_time": "",
+            "license_model": "postgresql-license",
+            "listener_endpoint": [],
+            "maintenance_window": "fri:06:47-fri:07:17",
+            "manage_master_user_password": null,
+            "master_user_secret": [],
+            "master_user_secret_kms_key_id": null,
+            "max_allocated_storage": 0,
+            "monitoring_interval": 0,
+            "monitoring_role_arn": "",
+            "multi_az": false,
+            "nchar_character_set_name": "",
+            "network_type": "IPV4",
+            "option_group_name": "default:postgres-18",
+            "parameter_group_name": "default.postgres18",
+            "password": "Postgresql123",
+            "password_wo": null,
+            "password_wo_version": null,
+            "performance_insights_enabled": false,
+            "performance_insights_kms_key_id": "",
+            "performance_insights_retention_period": 0,
+            "port": 5432,
+            "publicly_accessible": false,
+            "region": "ap-south-1",
+            "replica_mode": "",
+            "replicas": [],
+            "replicate_source_db": "",
+            "resource_id": "db-S4A3MNW6VLQAJV6537NAUZ7D4I",
+            "restore_to_point_in_time": [],
+            "s3_import": [],
+            "skip_final_snapshot": true,
+            "snapshot_identifier": null,
+            "status": "available",
+            "storage_encrypted": false,
+            "storage_throughput": 125,
+            "storage_type": "gp3",
+            "tags": {
+              "Name": "kanban-postgres"
+            },
+            "tags_all": {
+              "Name": "kanban-postgres"
+            },
+            "timeouts": null,
+            "timezone": "",
+            "upgrade_rollout_order": "second",
+            "upgrade_storage_config": null,
+            "username": "kanbanadmin",
+            "vpc_security_group_ids": [
+              "sg-0fe02a56b21fcb25b"
+            ],
+            "warning_event_categories": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "password_wo"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "identifier": "kanban-postgres",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInVwZGF0ZSI6NDgwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "aws_subnet.private_1",
+            "aws_subnet.private_2",
+            "aws_vpc.main",
+            "module.database.aws_db_subnet_group.kanban",
+            "module.security.aws_security_group.rds"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.database",
+      "mode": "managed",
+      "type": "aws_db_subnet_group",
+      "name": "kanban",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:ap-south-1:598606890027:subgrp:kanban-db-subnet-group",
+            "description": "Managed by Terraform",
+            "id": "kanban-db-subnet-group",
+            "name": "kanban-db-subnet-group",
+            "name_prefix": "",
+            "region": "ap-south-1",
+            "subnet_ids": [
+              "subnet-0e56c19fe12a7fc66",
+              "subnet-0eb96863bfaf7a75c"
+            ],
+            "supported_network_types": [
+              "IPV4"
+            ],
+            "tags": {
+              "Name": "kanban-db-subnet-group"
+            },
+            "tags_all": {
+              "Name": "kanban-db-subnet-group"
+            },
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "name": "kanban-db-subnet-group",
+            "region": "ap-south-1"
+          },
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.private_1",
+            "aws_subnet.private_2",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.ecs",
+      "mode": "managed",
+      "type": "aws_ecs_cluster",
+      "name": "kanban",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecs:ap-south-1:598606890027:cluster/kanban-ecs-cluster",
+            "configuration": [],
+            "id": "arn:aws:ecs:ap-south-1:598606890027:cluster/kanban-ecs-cluster",
+            "name": "kanban-ecs-cluster",
+            "region": "ap-south-1",
+            "service_connect_defaults": [],
+            "setting": [
+              {
+                "name": "containerInsights",
+                "value": "disabled"
+              }
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "kanban-ecs-cluster"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "kanban-ecs-cluster"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "name": "kanban-ecs-cluster",
+            "region": "ap-south-1"
+          },
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "module": "module.ecs",
+      "mode": "managed",
+      "type": "aws_ecs_service",
+      "name": "backend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "alarms": [],
+            "arn": "arn:aws:ecs:ap-south-1:598606890027:service/kanban-ecs-cluster/kanban-backend-service",
+            "availability_zone_rebalancing": "ENABLED",
+            "capacity_provider_strategy": [],
+            "cluster": "arn:aws:ecs:ap-south-1:598606890027:cluster/kanban-ecs-cluster",
+            "deployment_circuit_breaker": [
+              {
+                "enable": false,
+                "rollback": false
+              }
+            ],
+            "deployment_configuration": [
+              {
+                "bake_time_in_minutes": "0",
+                "canary_configuration": [],
+                "lifecycle_hook": [],
+                "linear_configuration": [],
+                "strategy": "ROLLING"
+              }
+            ],
+            "deployment_controller": [
+              {
+                "type": "ECS"
+              }
+            ],
+            "deployment_maximum_percent": 200,
+            "deployment_minimum_healthy_percent": 100,
+            "desired_count": 1,
+            "enable_ecs_managed_tags": false,
+            "enable_execute_command": false,
+            "force_delete": null,
+            "force_new_deployment": null,
+            "health_check_grace_period_seconds": 0,
+            "iam_role": "/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "id": "arn:aws:ecs:ap-south-1:598606890027:service/kanban-ecs-cluster/kanban-backend-service",
+            "launch_type": "FARGATE",
+            "load_balancer": [
+              {
+                "advanced_configuration": [],
+                "container_name": "kanban-backend",
+                "container_port": 4000,
+                "elb_name": "",
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kanban-backend-tg/f64ad9622d00f284"
+              }
+            ],
+            "name": "kanban-backend-service",
+            "network_configuration": [
+              {
+                "assign_public_ip": false,
+                "security_groups": [
+                  "sg-0fa603ce9ca333af7"
+                ],
+                "subnets": [
+                  "subnet-0e56c19fe12a7fc66",
+                  "subnet-0eb96863bfaf7a75c"
+                ]
+              }
+            ],
+            "ordered_placement_strategy": [],
+            "placement_constraints": [],
+            "platform_version": "LATEST",
+            "propagate_tags": "NONE",
+            "region": "ap-south-1",
+            "scheduling_strategy": "REPLICA",
+            "service_connect_configuration": [],
+            "service_registries": [],
+            "sigint_rollback": null,
+            "tags": {
+              "Environment": "dev",
+              "Name": "kanban-backend-service"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "kanban-backend-service"
+            },
+            "task_definition": "arn:aws:ecs:ap-south-1:598606890027:task-definition/kanban-backend-task:8",
+            "timeouts": null,
+            "triggers": {},
+            "volume_configuration": [],
+            "vpc_lattice_configurations": [],
+            "wait_for_steady_state": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "cluster": "arn:aws:ecs:ap-south-1:598606890027:cluster/kanban-ecs-cluster",
+            "name": "kanban-backend-service",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_subnet.private_1",
+            "aws_subnet.private_2",
+            "aws_vpc.main",
+            "module.alb.aws_lb_target_group.backend",
+            "module.database.aws_db_instance.kanban",
+            "module.database.aws_db_subnet_group.kanban",
+            "module.ecs.aws_ecs_cluster.kanban",
+            "module.ecs.aws_ecs_task_definition.backend",
+            "module.security.aws_iam_role.ecs_task_execution",
+            "module.security.aws_security_group.ecs",
+            "module.security.aws_security_group.rds"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.ecs",
+      "mode": "managed",
+      "type": "aws_ecs_service",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "alarms": [],
+            "arn": "arn:aws:ecs:ap-south-1:598606890027:service/kanban-ecs-cluster/kanban-frontend-service",
+            "availability_zone_rebalancing": "ENABLED",
+            "capacity_provider_strategy": [],
+            "cluster": "arn:aws:ecs:ap-south-1:598606890027:cluster/kanban-ecs-cluster",
+            "deployment_circuit_breaker": [
+              {
+                "enable": false,
+                "rollback": false
+              }
+            ],
+            "deployment_configuration": [
+              {
+                "bake_time_in_minutes": "0",
+                "canary_configuration": [],
+                "lifecycle_hook": [],
+                "linear_configuration": [],
+                "strategy": "ROLLING"
+              }
+            ],
+            "deployment_controller": [
+              {
+                "type": "ECS"
+              }
+            ],
+            "deployment_maximum_percent": 200,
+            "deployment_minimum_healthy_percent": 100,
+            "desired_count": 1,
+            "enable_ecs_managed_tags": false,
+            "enable_execute_command": false,
+            "force_delete": null,
+            "force_new_deployment": null,
+            "health_check_grace_period_seconds": 0,
+            "iam_role": "/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "id": "arn:aws:ecs:ap-south-1:598606890027:service/kanban-ecs-cluster/kanban-frontend-service",
+            "launch_type": "FARGATE",
+            "load_balancer": [
+              {
+                "advanced_configuration": [],
+                "container_name": "kanban-frontend",
+                "container_port": 80,
+                "elb_name": "",
+                "target_group_arn": "arn:aws:elasticloadbalancing:ap-south-1:598606890027:targetgroup/kfe-f665d4e99bc1bfc75d0f7fad31/423b2d92a2e02c8e"
+              }
+            ],
+            "name": "kanban-frontend-service",
+            "network_configuration": [
+              {
+                "assign_public_ip": false,
+                "security_groups": [
+                  "sg-0fa603ce9ca333af7"
+                ],
+                "subnets": [
+                  "subnet-0e56c19fe12a7fc66",
+                  "subnet-0eb96863bfaf7a75c"
+                ]
+              }
+            ],
+            "ordered_placement_strategy": [],
+            "placement_constraints": [],
+            "platform_version": "LATEST",
+            "propagate_tags": "NONE",
+            "region": "ap-south-1",
+            "scheduling_strategy": "REPLICA",
+            "service_connect_configuration": [],
+            "service_registries": [],
+            "sigint_rollback": null,
+            "tags": {
+              "Environment": "dev",
+              "Name": "kanban-frontend-service"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "kanban-frontend-service"
+            },
+            "task_definition": "arn:aws:ecs:ap-south-1:598606890027:task-definition/kanban-frontend-task:7",
+            "timeouts": null,
+            "triggers": {},
+            "volume_configuration": [],
+            "vpc_lattice_configurations": [],
+            "wait_for_steady_state": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "cluster": "arn:aws:ecs:ap-south-1:598606890027:cluster/kanban-ecs-cluster",
+            "name": "kanban-frontend-service",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_subnet.private_1",
+            "aws_subnet.private_2",
+            "aws_vpc.main",
+            "module.alb.aws_lb_target_group.frontend",
+            "module.ecs.aws_ecs_cluster.kanban",
+            "module.ecs.aws_ecs_task_definition.frontend",
+            "module.security.aws_iam_role.ecs_task_execution",
+            "module.security.aws_security_group.ecs"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.ecs",
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "backend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ecs:ap-south-1:598606890027:task-definition/kanban-backend-task:8",
+            "arn_without_revision": "arn:aws:ecs:ap-south-1:598606890027:task-definition/kanban-backend-task",
+            "container_definitions": "[{\"environment\":[{\"name\":\"DB_HOST\",\"value\":\"kanban-postgres.cr68ikwaoxzo.ap-south-1.rds.amazonaws.com:5432\"},{\"name\":\"DB_NAME\",\"value\":\"kanban\"},{\"name\":\"DB_PASSWORD\",\"value\":\"Postgresql123\"},{\"name\":\"DB_PORT\",\"value\":\"5432\"},{\"name\":\"DB_USER\",\"value\":\"kanbanadmin\"}],\"essential\":true,\"image\":\"598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-backend:latest\",\"mountPoints\":[],\"name\":\"kanban-backend\",\"portMappings\":[{\"containerPort\":4000,\"hostPort\":4000,\"protocol\":\"tcp\"}],\"systemControls\":[],\"volumesFrom\":[]}]",
+            "cpu": "256",
+            "enable_fault_injection": false,
+            "ephemeral_storage": [],
+            "execution_role_arn": "arn:aws:iam::598606890027:role/kanban-ecs-task-execution-role",
+            "family": "kanban-backend-task",
+            "id": "kanban-backend-task",
+            "ipc_mode": "",
+            "memory": "512",
+            "network_mode": "awsvpc",
+            "pid_mode": "",
+            "placement_constraints": [],
+            "proxy_configuration": [],
+            "region": "ap-south-1",
+            "requires_compatibilities": [
+              "FARGATE"
+            ],
+            "revision": 8,
+            "runtime_platform": [],
+            "skip_destroy": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "kanban-backend-task"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "kanban-backend-task"
+            },
+            "task_role_arn": "",
+            "track_latest": false,
+            "volume": []
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "container_definitions"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "family": "kanban-backend-task",
+            "region": "ap-south-1",
+            "revision": 8
+          },
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_subnet.private_1",
+            "aws_subnet.private_2",
+            "aws_vpc.main",
+            "module.database.aws_db_instance.kanban",
+            "module.database.aws_db_subnet_group.kanban",
+            "module.security.aws_iam_role.ecs_task_execution",
+            "module.security.aws_security_group.rds"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.ecs",
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ecs:ap-south-1:598606890027:task-definition/kanban-frontend-task:7",
+            "arn_without_revision": "arn:aws:ecs:ap-south-1:598606890027:task-definition/kanban-frontend-task",
+            "container_definitions": "[{\"environment\":[],\"essential\":true,\"image\":\"598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-frontend:latest\",\"mountPoints\":[],\"name\":\"kanban-frontend\",\"portMappings\":[{\"containerPort\":80,\"hostPort\":80,\"protocol\":\"tcp\"}],\"systemControls\":[],\"volumesFrom\":[]}]",
+            "cpu": "256",
+            "enable_fault_injection": false,
+            "ephemeral_storage": [],
+            "execution_role_arn": "arn:aws:iam::598606890027:role/kanban-ecs-task-execution-role",
+            "family": "kanban-frontend-task",
+            "id": "kanban-frontend-task",
+            "ipc_mode": "",
+            "memory": "512",
+            "network_mode": "awsvpc",
+            "pid_mode": "",
+            "placement_constraints": [],
+            "proxy_configuration": [],
+            "region": "ap-south-1",
+            "requires_compatibilities": [
+              "FARGATE"
+            ],
+            "revision": 7,
+            "runtime_platform": [],
+            "skip_destroy": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "kanban-frontend-task"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "kanban-frontend-task"
+            },
+            "task_role_arn": "",
+            "track_latest": false,
+            "volume": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "family": "kanban-frontend-task",
+            "region": "ap-south-1",
+            "revision": 7
+          },
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "module.security.aws_iam_role.ecs_task_execution"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "ecs_task_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::598606890027:role/kanban-ecs-task-execution-role",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-10-05T07:37:22Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "kanban-ecs-task-execution-role",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+            ],
+            "max_session_duration": 3600,
+            "name": "kanban-ecs-task-execution-role",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Name": "kanban-ecs-task-execution-role"
+            },
+            "tags_all": {
+              "Name": "kanban-ecs-task-execution-role"
+            },
+            "unique_id": "AROAYWX6AIQV7FHAIKKGS"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "name": "kanban-ecs-task-execution-role"
+          },
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "ecs_task_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "kanban-ecs-task-execution-role/arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            "role": "kanban-ecs-task-execution-role"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            "role": "kanban-ecs-task-execution-role"
+          },
+          "private": "bnVsbA==",
+          "dependencies": [
+            "module.security.aws_iam_role.ecs_task_execution"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "alb",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:security-group/sg-0999bbad958b8e99d",
+            "description": "Security group for Kanban Application Load Balancer",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "Allow outbound traffic",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-0999bbad958b8e99d",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTP from internet",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              },
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTPS from internet",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 443
+              }
+            ],
+            "name": "kanban-alb-sg",
+            "name_prefix": "",
+            "owner_id": "598606890027",
+            "region": "ap-south-1",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "kanban-alb-sg"
+            },
+            "tags_all": {
+              "Name": "kanban-alb-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "sg-0999bbad958b8e99d",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "ecs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:security-group/sg-0fa603ce9ca333af7",
+            "description": "Security group for Kanban ECS tasks",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "Allow outbound traffic",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-0fa603ce9ca333af7",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "Allow ALB to access backend",
+                "from_port": 4000,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-0999bbad958b8e99d"
+                ],
+                "self": false,
+                "to_port": 4000
+              },
+              {
+                "cidr_blocks": [],
+                "description": "Allow ALB to access frontend",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-0999bbad958b8e99d"
+                ],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "kanban-ecs-sg",
+            "name_prefix": "",
+            "owner_id": "598606890027",
+            "region": "ap-south-1",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "kanban-ecs-sg"
+            },
+            "tags_all": {
+              "Name": "kanban-ecs-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "sg-0fa603ce9ca333af7",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "rds",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:security-group/sg-0fe02a56b21fcb25b",
+            "description": "Security group for Kanban PostgreSQL database",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "Allow outbound traffic",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-0fe02a56b21fcb25b",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "Allow ECS backend to access PostgreSQL",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-0fa603ce9ca333af7"
+                ],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "kanban-rds-sg",
+            "name_prefix": "",
+            "owner_id": "598606890027",
+            "region": "ap-south-1",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "kanban-rds-sg"
+            },
+            "tags_all": {
+              "Name": "kanban-rds-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-03259948cb6e8edd7"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "sg-0fe02a56b21fcb25b",
+            "region": "ap-south-1"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "name": "ecs_backend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:security-group-rule/sgr-0435fcfe4607cdec4",
+            "cidr_ipv4": null,
+            "cidr_ipv6": null,
+            "description": "Allow ALB to access backend",
+            "from_port": 4000,
+            "id": "sgr-0435fcfe4607cdec4",
+            "ip_protocol": "tcp",
+            "prefix_list_id": null,
+            "referenced_security_group_id": "sg-0999bbad958b8e99d",
+            "region": "ap-south-1",
+            "security_group_id": "sg-0fa603ce9ca333af7",
+            "security_group_rule_id": "sgr-0435fcfe4607cdec4",
+            "tags": null,
+            "tags_all": {},
+            "to_port": 4000
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "sgr-0435fcfe4607cdec4",
+            "region": "ap-south-1"
+          },
+          "dependencies": [
+            "aws_vpc.main",
+            "module.security.aws_security_group.alb",
+            "module.security.aws_security_group.ecs"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "name": "ecs_frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:security-group-rule/sgr-0b91a590c2b5c24e0",
+            "cidr_ipv4": null,
+            "cidr_ipv6": null,
+            "description": "Allow ALB to access frontend",
+            "from_port": 80,
+            "id": "sgr-0b91a590c2b5c24e0",
+            "ip_protocol": "tcp",
+            "prefix_list_id": null,
+            "referenced_security_group_id": "sg-0999bbad958b8e99d",
+            "region": "ap-south-1",
+            "security_group_id": "sg-0fa603ce9ca333af7",
+            "security_group_rule_id": "sgr-0b91a590c2b5c24e0",
+            "tags": null,
+            "tags_all": {},
+            "to_port": 80
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "sgr-0b91a590c2b5c24e0",
+            "region": "ap-south-1"
+          },
+          "dependencies": [
+            "aws_vpc.main",
+            "module.security.aws_security_group.alb",
+            "module.security.aws_security_group.ecs"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.security",
+      "mode": "managed",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "name": "rds_postgres",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:ap-south-1:598606890027:security-group-rule/sgr-0ff3455afd967e7b6",
+            "cidr_ipv4": null,
+            "cidr_ipv6": null,
+            "description": "Allow ECS backend to access PostgreSQL",
+            "from_port": 5432,
+            "id": "sgr-0ff3455afd967e7b6",
+            "ip_protocol": "tcp",
+            "prefix_list_id": null,
+            "referenced_security_group_id": "sg-0fa603ce9ca333af7",
+            "region": "ap-south-1",
+            "security_group_id": "sg-0fe02a56b21fcb25b",
+            "security_group_rule_id": "sgr-0ff3455afd967e7b6",
+            "tags": null,
+            "tags_all": {},
+            "to_port": 5432
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "account_id": "598606890027",
+            "id": "sgr-0ff3455afd967e7b6",
+            "region": "ap-south-1"
+          },
+          "dependencies": [
+            "aws_vpc.main",
+            "module.security.aws_security_group.ecs",
+            "module.security.aws_security_group.rds"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

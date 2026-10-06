@@ -131,7 +131,7 @@ module "security" {
 
   vpc_id = aws_vpc.main.id
 
-  frontend_port = 3000
+  frontend_port = 80
   backend_port  = 4000
   database_port = 5432
 }
@@ -146,10 +146,11 @@ module "database" {
 
   rds_security_group_id = module.security.rds_security_group_id
 
-  db_name     = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
-  db_port     = 5432
+  snapshot_identifier = var.snapshot_identifier
+  db_name             = var.db_name
+  db_username         = var.db_username
+  db_password         = var.db_password
+  db_port             = 5432
 }
 
 module "alb" {
@@ -164,6 +165,42 @@ module "alb" {
 
   alb_security_group_id = module.security.alb_security_group_id
 
-  frontend_port = 3000
+  frontend_port = 80
   backend_port  = 4000
+}
+
+module "ecs" {
+  source = "./modules/ecs"
+
+  aws_region  = var.aws_region
+  environment = var.environment
+
+  vpc_id = aws_vpc.main.id
+
+  private_subnet_ids = [
+    aws_subnet.private_1.id,
+    aws_subnet.private_2.id
+  ]
+
+  ecs_security_group_id       = module.security.ecs_security_group_id
+  ecs_task_execution_role_arn = module.security.ecs_task_execution_role_arn
+
+  frontend_target_group_arn = module.alb.frontend_target_group_arn
+  backend_target_group_arn  = module.alb.backend_target_group_arn
+
+  frontend_image = "598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-frontend:latest"
+  backend_image  = "598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-backend:latest"
+
+  frontend_port = 80
+  backend_port  = 4000
+
+  desired_count = 1
+
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+
+  db_endpoint = module.database.db_endpoint
+  db_address  = module.database.db_address
+  db_port     = module.database.db_port
 }

@@ -49,3 +49,9 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "snapshot_identifier" {
+  description = "Optional DB snapshot identifier to restore from"
+  type        = string
+  default     = null
+}
