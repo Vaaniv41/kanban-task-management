@@ -106,3 +106,15 @@ variable "snapshot_identifier" {
   type        = string
   default     = null
 }
+
+variable "frontend_image" {
+  description = "Frontend container image URI"
+  type        = string
+  default     = "598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-frontend:latest"
+}
+
+variable "backend_image" {
+  description = "Backend container image URI"
+  type        = string
+  default     = "598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-backend:latest"
+}

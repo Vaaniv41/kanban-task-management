@@ -18,8 +18,8 @@ resource "aws_vpc" "main" {
 
 resource "aws_subnet" "public_1" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
-  availability_zone       = "ap-south-1a"
+  cidr_block              = var.public_subnet_cidrs[0]
+  availability_zone       = var.availability_zones[0]
   map_public_ip_on_launch = true
 
   tags = {
@@ -29,8 +29,8 @@ resource "aws_subnet" "public_1" {
 
 resource "aws_subnet" "public_2" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.2.0/24"
-  availability_zone       = "ap-south-1b"
+  cidr_block              = var.public_subnet_cidrs[1]
+  availability_zone       = var.availability_zones[1]
   map_public_ip_on_launch = true
 
   tags = {
@@ -44,8 +44,8 @@ resource "aws_subnet" "public_2" {
 
 resource "aws_subnet" "private_1" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.10.0/24"
-  availability_zone = "ap-south-1a"
+  cidr_block        = var.private_subnet_cidrs[0]
+  availability_zone = var.availability_zones[0]
 
   tags = {
     Name = "private-subnet-1a"
@@ -54,8 +54,8 @@ resource "aws_subnet" "private_1" {
 
 resource "aws_subnet" "private_2" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.11.0/24"
-  availability_zone = "ap-south-1b"
+  cidr_block        = var.private_subnet_cidrs[1]
+  availability_zone = var.availability_zones[1]
 
   tags = {
     Name = "private-subnet-1b"
@@ -248,8 +248,8 @@ module "ecs" {
   frontend_target_group_arn = module.alb.frontend_target_group_arn
   backend_target_group_arn  = module.alb.backend_target_group_arn
 
-  frontend_image = "598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-frontend:latest"
-  backend_image  = "598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-backend:latest"
+  frontend_image = var.frontend_image
+  backend_image  = var.backend_image
 
   frontend_port = 80
   backend_port  = 4000

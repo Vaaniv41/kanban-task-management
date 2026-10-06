@@ -2,11 +2,12 @@
 .terraform/
 *.tfstate
 *.tfstate.*
+tfplan
+state-version-*.json
 
-# Terraform sensitive/local files
+# Terraform local files
 *.tfvars
 *.tfvars.json
-.terraform.lock.hcl
 
 # Node dependencies
 node_modules/
