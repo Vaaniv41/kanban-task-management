@@ -1,0 +1,203 @@
+name: CI/CD - Build and Deploy Kanban
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: kanban-production
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: ap-south-1
+
+  FRONTEND_IMAGE: 598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-frontend:${{ github.sha }}
+  BACKEND_IMAGE: 598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-backend:${{ github.sha }}
+
+# ============================================================
+# CI - Continuous Integration
+# ============================================================
+
+jobs:
+
+  ci:
+    name: CI - Build and Push Docker Images
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # --------------------------------------------------------
+      # Checkout
+      # --------------------------------------------------------
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --------------------------------------------------------
+      # AWS Authentication
+      # --------------------------------------------------------
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # --------------------------------------------------------
+      # Ensure ECR repositories exist
+      # --------------------------------------------------------
+
+      - name: Ensure ECR repositories exist
+        shell: bash
+        run: |
+          for repository in kanban-frontend kanban-backend; do
+            if ! aws ecr describe-repositories \
+              --repository-names "$repository" \
+              >/dev/null 2>&1; then
+
+              echo "Creating ECR repository: $repository"
+
+              aws ecr create-repository \
+                --repository-name "$repository" \
+                >/dev/null
+            else
+              echo "ECR repository already exists: $repository"
+            fi
+          done
+
+      # --------------------------------------------------------
+      # Login to ECR
+      # --------------------------------------------------------
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # --------------------------------------------------------
+      # Docker Buildx
+      # --------------------------------------------------------
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # --------------------------------------------------------
+      # Build and push frontend
+      # --------------------------------------------------------
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ env.FRONTEND_IMAGE }}
+          build-args: |
+            REACT_APP_BASEURL=
+
+      # --------------------------------------------------------
+      # Build and push backend
+      # --------------------------------------------------------
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ env.BACKEND_IMAGE }}
+
+
+  # ============================================================
+  # CD - Continuous Deployment
+  # ============================================================
+
+  cd:
+    name: CD - Deploy Infrastructure and ECS Services
+    runs-on: ubuntu-latest
+
+    # CD starts only after CI succeeds
+    needs: ci
+
+    defaults:
+      run:
+        working-directory: terraform
+
+    env:
+      AWS_REGION: ap-south-1
+
+      TF_VAR_db_name: ${{ secrets.DB_NAME }}
+      TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
+      TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
+
+      TF_VAR_frontend_image: 598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-frontend:${{ github.sha }}
+      TF_VAR_backend_image: 598606890027.dkr.ecr.ap-south-1.amazonaws.com/kanban-backend:${{ github.sha }}
+
+    steps:
+
+      # --------------------------------------------------------
+      # Checkout
+      # --------------------------------------------------------
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --------------------------------------------------------
+      # AWS Authentication
+      # --------------------------------------------------------
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # --------------------------------------------------------
+      # Setup Terraform
+      # --------------------------------------------------------
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      # --------------------------------------------------------
+      # Terraform Init
+      # --------------------------------------------------------
+
+      - name: Initialize Terraform
+        run: terraform init -input=false
+
+      # --------------------------------------------------------
+      # Terraform Validate
+      # --------------------------------------------------------
+
+      - name: Validate Terraform
+        run: terraform validate
+
+      # --------------------------------------------------------
+      # Terraform Plan
+      # --------------------------------------------------------
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # --------------------------------------------------------
+      # Terraform Apply
+      # --------------------------------------------------------
+
+      - name: Apply infrastructure and deploy services
+        run: terraform apply -input=false -auto-approve
+
+      # --------------------------------------------------------
+      # Show Application URL
+      # --------------------------------------------------------
+
+      - name: Show application URL
+        run: |
+          echo "======================================"
+          echo "Kanban application deployed successfully"
+          echo "======================================"
+          echo "Application URL:"
+          terraform output -raw alb_dns_name
